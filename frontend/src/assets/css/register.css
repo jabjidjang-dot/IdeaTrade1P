@@ -1,20 +1,20 @@
 /* frontend/src/assets/css/register.css */
-/* ===== Page Base ===== */
+
+/* ===== 1. Page Base & Card Layout ================ */
 body {
   margin: 0;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #222; /* พื้นหลังหน้าเว็บสีเข้ม */
-  font-family: sans-serif;
+  background: #222; /* พื้นหลังหน้าเว็บ */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ===== Card ===== */
 .card {
   width: 900px;
-  height: 500px;
-  /* เปลี่ยนพื้นหลังเป็นสีน้ำเงินเข้ม (ธีม Login) */
+  height: 480px;
+  /* เปลี่ยนพื้นหลังเป็นสีน้ำเงินเข้มด้าน (Idea Trade Theme) */
   background: #151F32; 
   border-radius: 24px;
   color: white;
@@ -24,82 +24,126 @@ body {
   box-shadow: 0 20px 40px rgba(0,0,0,.5);
 }
 
-/* ===== Form ===== */
 .form {
-  width: 40%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .form h2 {
   font-size: 32px;
-  margin-bottom: 30px;
+  margin-top: 0;
+  margin-bottom: 40px;
+  color: #fff;
+  font-weight: 700;
 }
 
-/* ================================================= */
-/* ===== Input Group (Same Style as Email) ====== */
-/* ================================================= */
 
+/* ===== 2. Layout Helper (สำหรับ ชื่อ-สกุล) ======= */
+.row-input {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.row-input .group {
+  width: 50%;
+}
+
+
+/* ===== 3. Input Animation (L-Shape Style) ======== */
 .group {
   position: relative;
   width: 100%;
-  margin-bottom: 28px;
+  margin-bottom: 35px;
 }
 
-/* Input */
+/* --- Input Field --- */
 .group input {
   width: 100%;
-  padding: 12px 0;
-
+  padding: 16px 20px;
+  box-sizing: border-box;
+  
   background: transparent;
   color: #ffffff;
 
-  border: none;
-  /* เส้นปกติสีขาวจางๆ */
-  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  /* --- สร้างรูปตัว L --- */
+  border: 2px solid transparent; 
+  /* สีเส้นปกติ: ใช้สีขาวเพื่อให้เด่นบนพื้นน้ำเงินเข้ม */
+  border-left-color: #ffffff;    
+  border-bottom-color: #ffffff;  
+  
+  border-radius: 0; 
+  border-bottom-left-radius: 12px; 
 
-  font-size: 14px;
-  letter-spacing: 2px;
+  font-size: 16px;
   outline: none;
-
-  transition: border-color 0.25s ease;
+  
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Focus: เปลี่ยนเส้นเป็นสีฟ้า */
-.group input:focus {
-  border-bottom-color: #0099ff; 
+/* --- Active State: ตอนกด หรือ มีข้อความ --- */
+.group input:focus,
+.group input:not(:placeholder-shown) {
+  /* เปลี่ยนเส้นเป็นสีฟ้าสด (ธีม Idea Trade) */
+  border-color: #0099ff;
+  
+  /* กลายเป็นกล่องเต็ม */
+  border-radius: 12px;
+  
+  /* เงาสีฟ้า */
+  box-shadow: 0 0 15px rgba(0, 153, 255, 0.2);
 }
 
-/* Label */
+/* --- Label --- */
 .group label {
   position: absolute;
-  left: 0;
-  top: 50%;
+  left: 20px;
+  top: 50%; 
   transform: translateY(-50%);
-
-  font-size: 11px;
-  letter-spacing: 3px;
+  
   color: rgba(255, 255, 255, 0.7);
-
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  
+  padding: 0 5px;
   pointer-events: none;
-  transition: 0.25s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 10;
 }
 
-/* Floating label: เปลี่ยนสีข้อความเป็นสีฟ้า */
+/* --- Label Animation (Pill Effect) --- */
 .group input:focus + label,
 .group input:not(:placeholder-shown) + label {
-  top: -8px;
-  font-size: 10px;
-  color: #0099ff;
+  top: 0;
+  left: 20px;
+  
+  /* ป้ายพื้นหลังสีฟ้า ตัวหนังสือขาว */
+  background: #0099ff;
+  color: #ffffff;
+  
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 4px;
+  
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
-/* Autofill fix (Chrome) */
+/* --- Autofill Fix --- */
 .group input:-webkit-autofill {
   -webkit-text-fill-color: #ffffff !important;
-  /* เปลี่ยนเงาพื้นหลังเป็นสีเดียวกับ Card เพื่อไม่ให้เป็นสีขาว */
+  /* ถมสีพื้นหลัง input ให้กลืนกับพื้น Card (#151F32) */
   box-shadow: 0 0 0 1000px #151F32 inset !important; 
+  /* ขอบสีฟ้า */
+  border: 2px solid #0099ff !important; 
+  border-radius: 12px !important;
   transition: background-color 9999s ease-in-out 0s;
 }
 
-/* ===== Buttons ===== */
+/* ===== 4. Buttons (Idea Trade Colors) ============ */
 .btn-row {
   margin-top: 10px;
   display: flex;
@@ -107,22 +151,24 @@ body {
 }
 
 .btn {
-  padding: 12px 30px;
+  padding: 12px 35px;
   border: none;
-  border-radius: 20px;
+  border-radius: 20px; 
   color: white;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
 }
 
 .btn:hover {
   transform: translateY(-2px);
+  filter: brightness(1.1);
   box-shadow: 0 6px 14px rgba(0,0,0,.25);
 }
 
-/* Cancel: เปลี่ยนเป็นสีเทา */
+/* Cancel: สีเทาเข้ม (เหมือนปุ่ม Sign in with Gmail) */
 .cancel {
   background: #3B414E;
   color: #ccc;
@@ -132,17 +178,18 @@ body {
   color: white;
 }
 
-/* Next: เปลี่ยนเป็นสีฟ้า */
+/* Next: สีฟ้าสด (เหมือนปุ่ม Sign in / Join Membership) */
 .next {
-  background: #007bff; /* หรือ linear-gradient(90deg, #007bff, #0056b3); */
+  background: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
 
-/* ===== Illustration ===== */
+/* ===== 5. Illustration =========================== */
 .illus {
   width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 100px;
-  opacity: 0.3;
+  opacity: 0.8; 
 }
