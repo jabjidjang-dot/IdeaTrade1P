@@ -6,26 +6,27 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #444;
+  background: #222; /* พื้นหลังหน้าเว็บสีเข้ม */
   font-family: sans-serif;
 }
 
 /* ===== Card ===== */
 .card {
   width: 900px;
-  height: 480px;
-  background: linear-gradient(145deg, #1f2738, #161c2a);
+  height: 500px;
+  /* เปลี่ยนพื้นหลังเป็นสีน้ำเงินเข้ม (ธีม Login) */
+  background: #151F32; 
   border-radius: 24px;
   color: white;
   padding: 50px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 20px 40px rgba(0,0,0,.4);
+  box-shadow: 0 20px 40px rgba(0,0,0,.5);
 }
 
 /* ===== Form ===== */
 .form {
-  width: 50%;
+  width: 40%;
 }
 
 .form h2 {
@@ -34,7 +35,7 @@ body {
 }
 
 /* ================================================= */
-/* ===== Input Group (Same Style as Email) ========= */
+/* ===== Input Group (Same Style as Email) ====== */
 /* ================================================= */
 
 .group {
@@ -52,6 +53,7 @@ body {
   color: #ffffff;
 
   border: none;
+  /* เส้นปกติสีขาวจางๆ */
   border-bottom: 2px solid rgba(255, 255, 255, 0.6);
 
   font-size: 14px;
@@ -61,9 +63,9 @@ body {
   transition: border-color 0.25s ease;
 }
 
-/* Focus */
+/* Focus: เปลี่ยนเส้นเป็นสีฟ้า */
 .group input:focus {
-  border-bottom-color: #a855f7;
+  border-bottom-color: #0099ff; 
 }
 
 /* Label */
@@ -81,24 +83,25 @@ body {
   transition: 0.25s ease;
 }
 
-/* Floating label (หลังพิมพ์ / focus) */
+/* Floating label: เปลี่ยนสีข้อความเป็นสีฟ้า */
 .group input:focus + label,
 .group input:not(:placeholder-shown) + label {
   top: -8px;
   font-size: 10px;
-  color: #a855f7;
+  color: #0099ff;
 }
 
 /* Autofill fix (Chrome) */
 .group input:-webkit-autofill {
   -webkit-text-fill-color: #ffffff !important;
-  box-shadow: 0 0 0 1000px transparent inset !important;
+  /* เปลี่ยนเงาพื้นหลังเป็นสีเดียวกับ Card เพื่อไม่ให้เป็นสีขาว */
+  box-shadow: 0 0 0 1000px #151F32 inset !important; 
   transition: background-color 9999s ease-in-out 0s;
 }
 
 /* ===== Buttons ===== */
 .btn-row {
-  margin-top: 30px;
+  margin-top: 10px;
   display: flex;
   gap: 20px;
 }
@@ -119,12 +122,19 @@ body {
   box-shadow: 0 6px 14px rgba(0,0,0,.25);
 }
 
+/* Cancel: เปลี่ยนเป็นสีเทา */
 .cancel {
-  background: linear-gradient(90deg, #fb7185, #f97316);
+  background: #3B414E;
+  color: #ccc;
+}
+.cancel:hover {
+  background: #4B5563;
+  color: white;
 }
 
+/* Next: เปลี่ยนเป็นสีฟ้า */
 .next {
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  background: #007bff; /* หรือ linear-gradient(90deg, #007bff, #0056b3); */
 }
 
 /* ===== Illustration ===== */
